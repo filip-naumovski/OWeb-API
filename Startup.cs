@@ -28,7 +28,7 @@ namespace OWEBAPI
         {
             services.AddCors(o => o.AddPolicy("CORSall", builder =>
             {
-                builder.AllowAnyOrigin()
+                builder.WithOrigins("http://localhost:3000")
                        .AllowAnyMethod()
                        .AllowAnyHeader();
             }));
@@ -42,13 +42,13 @@ namespace OWEBAPI
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseCors("CORSall");
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
             app.UseMvc();
-            app.UseCors("CORSall");
         }
     }
 }
